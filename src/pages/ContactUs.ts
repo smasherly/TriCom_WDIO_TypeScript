@@ -17,7 +17,7 @@ class ContactUs extends BasePage {
         return $('input[name="your-email"]')
     }
     get yourMessage() {
-        return $('input[name="your-mesage"]')
+        return $('textarea[name="your-message"]')
     }
     get theForm() {
         return $('div[role="form"]')

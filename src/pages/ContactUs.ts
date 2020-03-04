@@ -22,30 +22,24 @@ class ContactUs extends BasePage {
     get theForm() {
         return $('div[role="form"]')
     }
-    // get yourNameError() {
-    //     return $('span.wpcf7-not-valid-tip:nth-of-type(1)')
-    // }
-    // get yourPhoneError() {
-    //     return $('span.wpcf7-not-valid-tip:nth-of-type(2)')
-    // }
-    // get yourEmailError() {
-    //     return $('span.wpcf7-not-valid-tip:nth-of-type(3)')
-    // }
-    // get yourMessageError() {
-    //     return $('span.wpcf7-not-valid-tip:nth-of-type(4)')
-    // }
+    get yourNameError() {
+        return $('span.wpcf7-not-valid-tip:nth-of-type(1)')
+    }
+    get yourPhoneError() {
+        return $('span.your-phone').getText();
+    }
+    get yourEmailError() {
+        return $('span.your-email').getText();
+    }
+    get yourMessageError() {
+        return $('span.your-message').getText();
+    }
     get theFormError() {
         return $('div.wpcf7-validation-errors')
     }
-    get validationMessages() {
-        return $$("span.wpcf7-not-valid-tip:nth-of-type")
-    }
-    getTextofErrorMessages() {
-        let message = this.validationMessages
-        return message.forEach(
-            message => message.getText()
-        )
-    }
+    // get validationMessages() {
+    //     return $$("span.wpcf7-not-valid-tip:nth-of-type")
+    // }
 
 }
 

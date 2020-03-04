@@ -54,7 +54,10 @@ exports.config = {
         // 5 instances get started at a time.
         maxInstances: 1,
         //
-        browserName: 'chrome'
+        browserName: 'chrome',
+        "goog:chromeOptions": {
+          // args: ["--headless", "--disable-gpu"]
+        }
     }],
     //
     // ===================
@@ -63,10 +66,10 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error
-    logLevel: 'error',
+    logLevel: 'silent',
     //
     // Warns when a deprecated command is used
-    deprecationWarnings: true,
+    // deprecationWarnings: true,
     //
     // If you only want to run your tests until a specific amount of tests have failed use
     // bail (default is 0 - don't bail, run all tests).
@@ -76,7 +79,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://the-internet.herokuapp.com',
+    baseUrl: 'https://tricomts.com',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -104,10 +107,7 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter.html
-    reporters: ['spec', ['allure', {
-      outputDir: 'allure-results',
-      disableWebdriverStepsReporting: true,
-    }]],
+   reporters: ["spec"],
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -149,6 +149,9 @@ exports.config = {
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
     before: function (capabilities, specs) {
+      var chai = require("chai");
+      global.expect = chai.expect;
+      chai.Should();
       require('ts-node').register({ files: true });
     },
     /**
@@ -187,11 +190,11 @@ exports.config = {
      * Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
      * @param {Object} test test details
      */
-    afterTest: function (test) {
-      if (test.error !== undefined) {
-        browser.takeScreenshot();
-      }
-    },
+    // afterTest: function (test) {
+    //   if (test.error !== undefined) {
+    //     browser.takeScreenshot();
+    //   }
+    // },
     /**
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details

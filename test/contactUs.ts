@@ -45,17 +45,14 @@ describe("required fields on contact us form", () => {
         browser.refresh();
         browser.pause(3000);
     });
-    it("enters text into every field except your message and checks error messages", () => {
-        ContactUs.yourName.setValue('Mr. Test Person')
-        ContactUs.yourPhone.setValue('19132370002')
-        ContactUs.yourEmail.setValue('test@test.com')
+    it("enters invalid email address and checks for appropriate error message", () => {
+        ContactUs.yourEmail.setValue('test234324')
         ContactUs.submit.click();
         browser.pause(1000);
-        expect(ContactUs.yourMessageError).to.eq("The field is required.")
+        expect(ContactUs.yourEmailError).to.eq("The e-mail address entered is invalid.")
         expect(ContactUs.theFormError.getText()).to.eq("One or more fields have an error. Please check and try again.")
-        browser.pause(1000);
+        browser.pause(3000);
     });
-    //check valid email format
     //Submits and sucess message?
     //clearValue()
 });
